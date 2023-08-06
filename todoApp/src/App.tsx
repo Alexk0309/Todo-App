@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -36,7 +29,7 @@ function App(): JSX.Element {
         contentInsetAdjustmentBehavior="automatic"
         style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Alex's Todo App</Text>
+          <Text style={styles.title}>Todo List</Text>
         </View>
         <ItemList desc="Hello World" isComplete={false} date="23-07-2023" />
         <ItemList
@@ -62,12 +55,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    height: 100,
+    marginTop: 30,
+    marginBottom: 30,
   },
   title: {
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 50,
   },
 });
 
