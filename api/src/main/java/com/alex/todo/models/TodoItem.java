@@ -38,6 +38,14 @@ public class TodoItem {
         this.date = date;
     }
 
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
     public String getDescription() {
         return description;
     }
