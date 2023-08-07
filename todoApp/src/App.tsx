@@ -31,12 +31,8 @@ function App(): JSX.Element {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Todo List</Text>
         </View>
-        <ItemList desc="Hello World" isComplete={false} date="23-07-2023" />
-        <ItemList
-          desc="Completing this task"
-          isComplete={true}
-          date="23-07-2023"
-        />
+        <ItemList desc="Wash dishes" isComplete={false} date="23-07-2023" />
+        <ItemList desc="Practical test" isComplete={true} date="23-07-2023" />
       </ScrollView>
     </SafeAreaView>
   );
@@ -46,6 +42,8 @@ const styles = StyleSheet.create({
   safeContainer: {
     backgroundColor: 'white',
     height: '100%',
+    paddingLeft: 30,
+    paddingRight: 30,
   },
   container: {
     backgroundColor: 'white',

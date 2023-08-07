@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
 interface IItemList {
   desc: string;
@@ -15,9 +15,14 @@ const ItemList: FC<IItemList> = props => {
   return (
     <>
       <View style={styles.itemContainer}>
-        <Text style={styles.itemDescText}>{desc}</Text>
-        <Text style={flattenStyle}>{status}</Text>
-        <Text style={styles.itemDateText}>{date}</Text>
+        <View>
+          <Text style={styles.itemDescText}>{desc}</Text>
+          <Text style={flattenStyle}>{status}</Text>
+          <Text style={styles.itemDateText}>{date}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button title="Edit" />
+        </View>
       </View>
     </>
   );
@@ -28,8 +33,8 @@ export default ItemList;
 const styles = StyleSheet.create({
   itemContainer: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     backgroundColor: 'white',
     marginBottom: 20,
   },
@@ -45,5 +50,9 @@ const styles = StyleSheet.create({
   itemDateText: {
     color: 'black',
     fontSize: 15,
+  },
+  buttonContainer: {
+    alignSelf: 'center',
+    marginLeft: 'auto',
   },
 });
