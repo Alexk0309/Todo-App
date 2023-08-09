@@ -1,12 +1,23 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {IAddTodoItem} from '../../../api/todoApi';
+import {IAddTodoItem} from '../api/todoApi';
 
 interface IInitialSliceState {
   todoItems: IAddTodoItem[];
 }
 
 const initialState: IInitialSliceState = {
-  todoItems: [],
+  todoItems: [
+    {
+      description: 'First Task',
+      complete: false,
+      date: '24-07-2023',
+    },
+    {
+      description: 'Second Task',
+      complete: true,
+      date: '24-07-2023',
+    },
+  ],
 };
 
 const todoSlice = createSlice({

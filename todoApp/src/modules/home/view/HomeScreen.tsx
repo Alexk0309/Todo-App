@@ -1,17 +1,22 @@
 import React from 'react';
-import {ScrollView, View, Text, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import ItemList from '../../../components/ItemList';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../store/index';
 
 const HomeScreen = () => {
+  const {todoItems} = useSelector(({todo}: RootState) => todo);
+
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Todo List</Text>
-      </View>
-      <ItemList desc="Wash dishes" isComplete={false} date="23-07-2023" />
-      <ItemList desc="Practical test" isComplete={true} date="23-07-2023" />
+      {todoItems.map(item => {
+        const {description, complete, date} = item;
+        return (
+          <ItemList desc={description} isComplete={complete} date={date} />
+        );
+      })}
     </ScrollView>
   );
 };
@@ -21,18 +26,5 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-  },
-  titleContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    marginTop: 30,
-    marginBottom: 30,
-  },
-  title: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 50,
   },
 });
