@@ -12,6 +12,9 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import HomeScreen from './modules/home/view/HomeScreen';
 import {Provider} from 'react-redux';
 import store from './store';
+import {QueryClient, QueryClientProvider} from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -21,18 +24,20 @@ function App(): JSX.Element {
   };
 
   return (
-    <Provider store={store}>
-      <SafeAreaView style={styles.safeContainer}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Todo List</Text>
-        </View>
-        <HomeScreen />
-      </SafeAreaView>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <SafeAreaView style={styles.safeContainer}>
+          <StatusBar
+            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+            backgroundColor={backgroundStyle.backgroundColor}
+          />
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Todo List</Text>
+          </View>
+          <HomeScreen />
+        </SafeAreaView>
+      </Provider>
+    </QueryClientProvider>
   );
 }
 
