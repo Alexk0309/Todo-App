@@ -1,4 +1,4 @@
-import axios from 'axios';
+import {request} from '.';
 
 export interface ITodoItem {
   description: string;
@@ -8,7 +8,5 @@ export interface ITodoItem {
 }
 
 export const getTodoItems = async () => {
-  return axios
-    .get('http://192.168.0.103:8080/api/v1/todoitems')
-    .then(({data}) => data);
+  return request.get('/todoitems').then(({data}) => data);
 };
