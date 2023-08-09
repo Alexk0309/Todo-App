@@ -17,13 +17,11 @@ public class TodoItemConfig {
         return args -> {
             TodoItem todo1 = new TodoItem(
                     "First Task",
-                    false,
-                    LocalDate.now()
+                    false
             );
             TodoItem todo2 = new TodoItem(
                     "Second Task",
-                    true,
-                    LocalDate.now()
+                    true
             );
 
             repository.saveAll(

@@ -2,7 +2,8 @@ package com.alex.todo.models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 @Table
@@ -21,21 +22,21 @@ public class TodoItem {
     private Long Id;
     private String description;
     private boolean complete;
-    private LocalDate date;
+    private String date;
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public TodoItem() {}
 
-    public TodoItem(Long Id, String description, boolean complete, LocalDate date) {
+    public TodoItem(Long Id, String description, boolean complete) {
         this.Id = Id;
         this.description = description;
         this.complete = complete;
-        this.date = date;
     }
 
-    public TodoItem(String description, boolean complete, LocalDate date) {
+    public TodoItem(String description, boolean complete) {
         this.description = description;
         this.complete = complete;
-        this.date = date;
     }
 
     public Long getId() {
@@ -62,12 +63,13 @@ public class TodoItem {
         this.complete = complete;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    @PrePersist
+    public void setDate() {
+        this.date = dateFormat.format(new Date());
     }
 
     @Override
