@@ -1,14 +1,10 @@
 import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import ItemList from '../../../components/ItemList';
-// import {useSelector} from 'react-redux';
-// import {RootState} from '../../../store/index';
 import {useQuery} from 'react-query';
 import {ITodoItem, getTodoItems} from '../../../api/todoApi';
 
 const HomeScreen = () => {
-  //   const {todoItems} = useSelector(({todo}: RootState) => todo);
-
   const {data, isLoading, refetch} = useQuery({
     queryKey: ['get_todo_item'],
     queryFn: () => getTodoItems(),
@@ -21,6 +17,7 @@ const HomeScreen = () => {
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
+      showsVerticalScrollIndicator={false}
       style={styles.container}>
       {isLoading ? (
         <Text>Loading ...</Text>
