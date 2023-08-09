@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import SmallButton from './SmallButton';
 
 interface IItemList {
   desc: string;
@@ -13,18 +14,24 @@ const ItemList: FC<IItemList> = props => {
   const colorStatus = isComplete ? {color: 'green'} : {color: 'red'};
   const flattenStyle = StyleSheet.flatten([styles.itemStatusText, colorStatus]);
   return (
-    <>
+    <TouchableOpacity>
       <View style={styles.itemContainer}>
         <View>
           <Text style={styles.itemDescText}>{desc}</Text>
           <Text style={flattenStyle}>{status}</Text>
           <Text style={styles.itemDateText}>{date}</Text>
         </View>
+
         <View style={styles.buttonContainer}>
-          <Button title="Edit" />
+          <TouchableOpacity style={styles.button}>
+            <SmallButton iconName="edit" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <SmallButton iconName="delete" />
+          </TouchableOpacity>
         </View>
       </View>
-    </>
+    </TouchableOpacity>
   );
 };
 
@@ -39,20 +46,34 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   itemDescText: {
+    width: 200,
     color: 'black',
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   itemStatusText: {
     color: 'black',
-    fontSize: 20,
+    fontSize: 18,
   },
   itemDateText: {
     color: 'black',
     fontSize: 15,
   },
   buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
     alignSelf: 'center',
     marginLeft: 'auto',
+  },
+  button: {
+    height: 40,
+    width: 40,
+    justifyContent: 'center',
+  },
+  buttonText: {
+    fontSize: 20,
+    color: 'black',
+    textAlign: 'center',
   },
 });
