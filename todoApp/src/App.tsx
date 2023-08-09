@@ -1,16 +1,13 @@
 import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
-  View,
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import ItemList from './components/ItemList';
+import HomeScreen from './modules/home/view/HomeScreen';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -25,15 +22,7 @@ function App(): JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Todo List</Text>
-        </View>
-        <ItemList desc="Wash dishes" isComplete={false} date="23-07-2023" />
-        <ItemList desc="Practical test" isComplete={true} date="23-07-2023" />
-      </ScrollView>
+      <HomeScreen />
     </SafeAreaView>
   );
 }
@@ -44,22 +33,6 @@ const styles = StyleSheet.create({
     height: '100%',
     paddingLeft: 30,
     paddingRight: 30,
-  },
-  container: {
-    backgroundColor: 'white',
-  },
-  titleContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    marginTop: 30,
-    marginBottom: 30,
-  },
-  title: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 50,
   },
 });
 
