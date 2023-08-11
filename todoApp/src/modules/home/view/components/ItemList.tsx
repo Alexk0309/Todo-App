@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import SmallButton from './SmallButton';
+import SmallButton from '../../../../components/SmallButton';
 import {useMutation} from 'react-query';
-import {deleteTodo} from '../api/todoApi';
+import {deleteTodo} from '../../../../api/todoApi';
 
 interface IItemList {
   id: number;

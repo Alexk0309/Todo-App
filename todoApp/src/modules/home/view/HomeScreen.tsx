@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import ItemList from '../../../components/ItemList';
+import ItemList from './components/ItemList';
 import {useQuery} from 'react-query';
 import {ITodoItem, getTodoItems} from '../../../api/todoApi';
 import AddTaskModal from './AddTaskModal';
