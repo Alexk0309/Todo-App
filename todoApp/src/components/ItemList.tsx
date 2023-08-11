@@ -1,18 +1,30 @@
 import React, {FC} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import SmallButton from './SmallButton';
+import {useMutation} from 'react-query';
+import {deleteTodo} from '../api/todoApi';
 
 interface IItemList {
+  id: number;
   desc: string;
   isComplete: boolean;
   date: string;
 }
 
 const ItemList: FC<IItemList> = props => {
-  const {desc, isComplete, date} = props;
+  const {id, desc, isComplete, date} = props;
   const status = isComplete ? 'Completed' : 'Incomplete';
   const colorStatus = isComplete ? {color: 'green'} : {color: 'red'};
   const flattenStyle = StyleSheet.flatten([styles.itemStatusText, colorStatus]);
+
+  const deleteTaskMutation = useMutation({mutationFn: deleteTodo});
+
+  const handleDeleteTask = () => {
+    console.log(id);
+    deleteTaskMutation.mutate(id);
+    Alert.alert('Delete Task', 'Task successfully deleted');
+  };
+
   return (
     <TouchableOpacity>
       <View style={styles.itemContainer}>
@@ -27,7 +39,7 @@ const ItemList: FC<IItemList> = props => {
             <SmallButton iconName="edit" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <SmallButton iconName="delete" />
+            <SmallButton onPress={handleDeleteTask} iconName="delete" />
           </TouchableOpacity>
         </View>
       </View>

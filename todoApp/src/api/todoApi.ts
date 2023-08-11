@@ -20,3 +20,7 @@ export const addTodo = async (payload: IAddTodoPayload) => {
     .post('/todoitems', payload)
     .catch(e => console.log('Post item error: ' + e));
 };
+
+export const deleteTodo = async (id: number) => {
+  request.delete(`/todoitems/${id}`);
+};

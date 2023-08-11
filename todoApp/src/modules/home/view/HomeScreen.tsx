@@ -37,6 +37,7 @@ const HomeScreen = () => {
             return (
               <ItemList
                 key={id}
+                id={id}
                 desc={description}
                 isComplete={complete}
                 date={date}

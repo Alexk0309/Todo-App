@@ -8,9 +8,9 @@ interface ISmallButton {
 }
 
 const SmallButton: FC<ISmallButton> = props => {
-  const {iconName} = props;
+  const {iconName, onPress} = props;
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <MaterialIcon name={iconName} size={30} color="black" />
     </TouchableOpacity>
   );
