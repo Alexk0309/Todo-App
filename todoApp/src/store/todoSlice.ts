@@ -1,33 +1,42 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {ITodoItem} from '../api/todoApi';
 
+interface IEditTaskModalData {
+  id: number;
+  description: string;
+}
+
+interface IHideShowModalProps {
+  showModal: boolean;
+  clearData?: boolean;
+}
 interface IInitialSliceState {
-  todoItems: ITodoItem[];
+  editTaskModalData: Partial<IEditTaskModalData>;
+  showEditTaskModal: boolean;
 }
 
 const initialState: IInitialSliceState = {
-  todoItems: [
-    {
-      description: 'First Task',
-      complete: false,
-      date: '24-07-2023',
-      id: 1,
-    },
-    {
-      description: 'Second Task',
-      complete: true,
-      date: '24-07-2023',
-      id: 2,
-    },
-  ],
+  editTaskModalData: {},
+  showEditTaskModal: false,
 };
 
 const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
-    SET_TODO_ITEM(state, {payload}: PayloadAction<ITodoItem>) {
-      state.todoItems.push(payload);
+    SETUP_EDIT_TASK_MODAL_DATA(
+      state,
+      {payload}: PayloadAction<IEditTaskModalData>,
+    ) {
+      state.editTaskModalData = payload;
+    },
+    CONTROL_EDIT_TASK_MODAL(
+      state,
+      {payload: {showModal, clearData}}: PayloadAction<IHideShowModalProps>,
+    ) {
+      state.showEditTaskModal = showModal;
+      if (clearData) {
+        state.editTaskModalData = {};
+      }
     },
   },
 });

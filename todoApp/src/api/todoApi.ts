@@ -37,5 +37,5 @@ export const deleteTodo = async (pathId: ITodoPath) => {
 
 export const editTodo = async (params: IEditTodoParams) => {
   const {pathId, param} = params;
-  request.put(`/todoitems/${pathId.id}`, param);
+  request.put(`/todoitems/${pathId.id}?description=${param.description}`);
 };

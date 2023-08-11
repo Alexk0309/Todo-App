@@ -10,6 +10,7 @@ import ItemList from './components/ItemList';
 import {useQuery} from 'react-query';
 import {ITodoItem, getTodoItems} from '../../../api/todoApi';
 import AddTaskModal from './AddTaskModal';
+import EditTaskModal from './EditTaskModal';
 
 const HomeScreen = () => {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -25,6 +26,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <AddTaskModal visible={showAddModal} setShowAddModal={setShowAddModal} />
+      <EditTaskModal />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}

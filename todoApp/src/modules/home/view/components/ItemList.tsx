@@ -3,6 +3,8 @@ import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import SmallButton from '../../../../components/SmallButton';
 import {useMutation} from 'react-query';
 import {deleteTodo} from '../../../../api/todoApi';
+import {useDispatch} from 'react-redux';
+import {todoActions} from '../../../../store/todoSlice';
 
 interface IItemList {
   id: number;
@@ -16,6 +18,7 @@ const ItemList: FC<IItemList> = props => {
   const status = isComplete ? 'Completed' : 'Incomplete';
   const colorStatus = isComplete ? {color: 'green'} : {color: 'red'};
   const flattenStyle = StyleSheet.flatten([styles.itemStatusText, colorStatus]);
+  const dispatch = useDispatch();
 
   const deleteTaskMutation = useMutation({mutationFn: deleteTodo});
 
@@ -23,6 +26,20 @@ const ItemList: FC<IItemList> = props => {
     console.log(id);
     deleteTaskMutation.mutate({id: id});
     Alert.alert('Delete Task', 'Task successfully deleted');
+  };
+
+  const handleEditButton = () => {
+    dispatch(
+      todoActions.SETUP_EDIT_TASK_MODAL_DATA({
+        id: id,
+        description: desc,
+      }),
+    );
+    dispatch(
+      todoActions.CONTROL_EDIT_TASK_MODAL({
+        showModal: true,
+      }),
+    );
   };
 
   return (
@@ -36,7 +53,7 @@ const ItemList: FC<IItemList> = props => {
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button}>
-            <SmallButton iconName="edit" />
+            <SmallButton onPress={handleEditButton} iconName="edit" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <SmallButton onPress={handleDeleteTask} iconName="delete" />
