@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import SmallButton from '../../../../components/SmallButton';
 import {useMutation} from 'react-query';
-import {deleteTodo} from '../../../../api/todoApi';
+import {deleteTodo, editTodoStatus} from '../../../../api/todoApi';
 import {useDispatch} from 'react-redux';
 import {todoActions} from '../../../../store/todoSlice';
 
@@ -21,9 +21,9 @@ const ItemList: FC<IItemList> = props => {
   const dispatch = useDispatch();
 
   const deleteTaskMutation = useMutation({mutationFn: deleteTodo});
+  const toggleTaskStatusMutation = useMutation({mutationFn: editTodoStatus});
 
   const handleDeleteTask = () => {
-    console.log(id);
     deleteTaskMutation.mutate({id: id});
     Alert.alert('Delete Task', 'Task successfully deleted');
   };
@@ -42,8 +42,15 @@ const ItemList: FC<IItemList> = props => {
     );
   };
 
+  const handleEditTaskStatus = () => {
+    toggleTaskStatusMutation.mutate({
+      pathId: {id: id},
+      param: {complete: !isComplete},
+    });
+  };
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={handleEditTaskStatus}>
       <View style={styles.itemContainer}>
         <View>
           <Text style={styles.itemDescText}>{desc}</Text>

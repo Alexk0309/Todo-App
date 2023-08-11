@@ -11,6 +11,10 @@ interface ITodoPayload {
   description: string;
 }
 
+interface ITodoStatusPayload {
+  complete: boolean;
+}
+
 interface ITodoPath {
   id: number;
 }
@@ -18,6 +22,11 @@ interface ITodoPath {
 interface IEditTodoParams {
   pathId: ITodoPath;
   param: ITodoPayload;
+}
+
+interface IEditTodoStatusParams {
+  pathId: ITodoPath;
+  param: ITodoStatusPayload;
 }
 
 export const getTodoItems = async () => {
@@ -38,4 +47,9 @@ export const deleteTodo = async (pathId: ITodoPath) => {
 export const editTodo = async (params: IEditTodoParams) => {
   const {pathId, param} = params;
   request.put(`/todoitems/${pathId.id}?description=${param.description}`);
+};
+
+export const editTodoStatus = async (params: IEditTodoStatusParams) => {
+  const {pathId, param} = params;
+  request.put(`/todoitems/${pathId.id}?complete=${param.complete}`);
 };
