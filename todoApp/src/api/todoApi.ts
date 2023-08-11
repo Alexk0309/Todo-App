@@ -11,6 +11,10 @@ interface IAddTodoPayload {
   description: string;
 }
 
+interface IDeleteTodoPath {
+  id: number;
+}
+
 export const getTodoItems = async () => {
   return request.get('/todoitems').then(({data}) => data);
 };
@@ -21,6 +25,7 @@ export const addTodo = async (payload: IAddTodoPayload) => {
     .catch(e => console.log('Post item error: ' + e));
 };
 
-export const deleteTodo = async (id: number) => {
+export const deleteTodo = async (pathId: IDeleteTodoPath) => {
+  const {id} = pathId;
   request.delete(`/todoitems/${id}`);
 };

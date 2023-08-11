@@ -21,7 +21,7 @@ const ItemList: FC<IItemList> = props => {
 
   const handleDeleteTask = () => {
     console.log(id);
-    deleteTaskMutation.mutate(id);
+    deleteTaskMutation.mutate({id: id});
     Alert.alert('Delete Task', 'Task successfully deleted');
   };
 
